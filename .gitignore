@@ -137,3 +137,4 @@ deepspeech-0.6.1-models/
 # Mid-process output
 urls.txt
 *-out.json
+*.part
