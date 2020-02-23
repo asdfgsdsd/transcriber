@@ -138,3 +138,7 @@ deepspeech-0.6.1-models/
 urls.txt
 *-out.json
 *.part
+*.srt
+*.mp4
+*.webm
+*.mkv

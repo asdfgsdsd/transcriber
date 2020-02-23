@@ -2,9 +2,10 @@ import subprocess
 
 import pornhub
 import youtube_dl
+import subtitler
 
-NUM_VIDEOS = 7
-DOWNLOAD = False
+NUM_VIDEOS = 1
+DOWNLOAD = True
 
 search_keywords = []
 
@@ -12,8 +13,8 @@ client = pornhub.PornHub(keywords=search_keywords, pro=True, sort="mv", timefram
 
 ydl_opts = {'postprocessors': [{
         'key': 'FFmpegExtractAudio',
-        'preferredcodec': 'wav'
-    }], "outtmpl": "%(id)s.%(ext)s"}
+        'preferredcodec': 'wav',
+    }], "outtmpl": "%(id)s.%(ext)s", "keepvideo": "True"}
 
 filenames = []
 
@@ -36,3 +37,6 @@ for filename in filenames:
     subprocess.run(['deepspeech', '--model', 'deepspeech-0.6.1-models/output_graph.pbmm',
                     '--lm', 'deepspeech-0.6.1-models/lm.binary', '--trie', 'deepspeech-0.6.1-models/trie', '--audio',
                     filename, '--json'], stdout=out_file)
+
+for filename in filenames:
+    subtitler.gen_subs(filename.split(".")[0])
